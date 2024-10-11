@@ -11,7 +11,7 @@ def calculate(*args):
     try:
         value = float(mile.get()) #entrada
         result = float(1.609344 * value)#processamento
-        metros.set(result) #saida
+        mile.set(result) #saida
     except ValueError:
         pass
 
