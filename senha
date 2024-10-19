@@ -1,0 +1,33 @@
+from tkinter import *
+from tkinter import ttk
+import random
+
+root = Tk()
+root.title("Gerador de Senhas")
+
+def gerar_codigo():
+    # Gera uma senha aleatória de 8 dígitos com letras, números e caracteres especiais.
+    alfabeto = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'  # Inclui letras maiúsculas
+    numeros = '0123456789'
+    especiais = '!@#$%^&*()_+-=[]{}|;:,.<>/?`~'  # Mais caracteres especiais
+    todos_caracteres = alfabeto + numeros + especiais
+
+    # Garante que a senha tenha pelo menos um caractere de cada tipo
+    senha = random.choice(alfabeto) + random.choice(numeros) + random.choice(especiais)
+    for i in range(5):  # Completa a senha com caracteres aleatórios
+        senha += random.choice(todos_caracteres)
+
+    # Embaralha a senha para uma distribuição mais aleatória
+    senha = ''.join(random.sample(senha, len(senha)))
+
+    codigo_gerado.set(senha)  # Atualiza o label com a nova senha
+
+mainframe = ttk.Frame(root, padding="3 3 12 12")
+mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
+
+codigo_gerado = StringVar()
+ttk.Label(mainframe, textvariable=codigo_gerado).grid(column=1, row=1, sticky=(W, E))
+
+ttk.Button(mainframe, text="Gerar Senha", command=gerar_codigo).grid(column=1, row=2, sticky=W)
+
+root.mainloop()
